@@ -2,8 +2,12 @@ interface Attachment {
     val type: String
 }
 
-data class Photo(
-    override val type: String = "Photo",
+data class PhotoAttachment(
+    override val type: String = "photo",
+    val photo: Photo =  Photo()
+    ) : Attachments
+  
+data class Photo(  
     val id: Int = 0,
     val ownerId: Int = 0,
     val date: Int = 0,
@@ -13,10 +17,14 @@ data class Photo(
     val sizes: Array<Any> = emptyArray(),
     val width: Int = 0,
     val height: Int = 0
-) : Attachment
+)
 
-data class Audio(
-    override val type: String = "Audio",
+data class AudioAttachment(
+    override val type: String = "audio",
+    val audio: Audio = Audio()
+) : Attachments
+
+  data class Audio(
     val id: Int = 0,
     val ownerId: Int = 0,
     val date: Int = 0,
@@ -29,10 +37,14 @@ data class Audio(
     val genreId: Int = 0,
     val noSearch: Boolean = false,
     val isHq: Boolean = false
-) : Attachment
+) 
+
+data class NoteAttachment(
+    override val type: String = "Video",
+    val note: Note = Note()
+) : Attachments
 
 data class Note(
-    override val type: String = "Note",
     val id: Int = 0,
     val ownerId: Int = 0,
     val date: Int = 0,
@@ -41,10 +53,14 @@ data class Note(
     val comments: Int = 0,
     val readComments: Int = 0,
     val viewUrl: String = ""
-) : Attachment
+) 
+
+data class VideoAttachment(
+     override val type: String = "Video",
+     val video: Video = Video()
+) : Attachments
 
 data class Video(
-    override val type: String = "Video",
     val id: Int = 0,
     val ownerId: Int = 0,
     val date: Int = 0,
@@ -86,10 +102,13 @@ data class Video(
     val spectators: Int = 0,
     val likes: Likes = Likes(),
     val reposts: Reposts = Reposts(),
-) : Attachment
+
+data class PageAttachment(
+     override val type: String = "Page",
+     val page: Page = Page()
+) : Attachments
 
 data class Page(
-    override val type: String = "",
     val id: Int = 0,
     val ownerId: Int = 0,
     val date: Int = 0,
@@ -108,4 +127,4 @@ data class Page(
     val source: String = "",
     val html: String? = null,
     val viewUrl: String = ""
-) : Attachment
+) 
